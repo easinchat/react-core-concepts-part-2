@@ -1,14 +1,25 @@
 import Counter from "./counter";
 
-import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
 import Batsman from "./Batsman";
 import Bowling from "./bowling";
+import Users from "./user";
+import { Suspense } from "react";
+import Friends from "./friends";
+const fetchUser = fetch("https://jsonplaceholder.typicode.com/users").then(
+  (res) => res.json(),
+);
+const fetchFriend = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  return res.json();
+};
 
 function App() {
+  const friendsPromise = fetchFriend();
+
   function handleClick() {
     alert("I am Clicked");
   }
@@ -21,6 +32,12 @@ function App() {
   };
   return (
     <>
+      {/* <Suspense fallback={<h3>Loding...</h3>}>
+        <Users fetchUser={fetchUser}></Users>
+      </Suspense> */}
+      <Suspense fallback={<h3>Friends are coming for treat</h3>}>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
       <Bowling></Bowling>
       <Batsman></Batsman>
       <h1>Get started</h1>
