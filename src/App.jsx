@@ -11,6 +11,10 @@ import { Suspense } from "react";
 import Friends from "./friends";
 import Posts from "./posts";
 import Albums from "./albums";
+import Tasks from "./tasks";
+import Tasks2 from "./tasks2";
+import Show from "./show";
+import Apis from "./apis";
 // const fetchUser = fetch("https://jsonplaceholder.typicode.com/users").then(
 //   (res) => res.json(),
 // );
@@ -40,12 +44,24 @@ function App() {
     const newNum = num + 5;
     alert(newNum);
   };
+  const fetchAPi = fetch("https://jsonplaceholder.typicode.com/users").then(
+    (res) => res.json(),
+  );
   return (
     <>
-      <h1>Yeasin</h1>
-      <Suspense fallback={<h2>Loding.....</h2>}>
-        <Albums fetchAlbums={fetchAlbums}></Albums>
+      <h1>Last complete</h1>
+      <Suspense fallback={<p>Looding...</p>}>
+        <Apis fetchAPi={fetchAPi}></Apis>
       </Suspense>
+
+      <Show></Show>
+      <h1>Task 1</h1>
+      <Tasks></Tasks>
+      <Tasks2></Tasks2>
+
+      {/* <Suspense fallback={<h2>Loding.....</h2>}>
+        <Albums fetchAlbums={fetchAlbums}></Albums>
+      </Suspense> */}
 
       {/* <Suspense fallback={<h3>loding</h3>}>
         <Posts postsPromise={postsPromise}></Posts>
